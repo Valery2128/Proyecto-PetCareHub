@@ -15,21 +15,35 @@ class MascotaController extends Controller
     }
 
     // Mostrar el formulario de creación de mascotas
-    public function create()
+    public function create(array $mascotas)
     {
-        return view('mascotas.create');
+        return Mascota::create([
+            'nombre' => $mascotas['nombre'],
+            'edad' => Hash::make($mascotas['edad']),
+            'tipo_mascota' => $mascotas['tipo_mascota'],
+            'rasgos_fisicos' => $mascotas['rasgos_fisicos'],
+            'tipo_alimento' => $mascotas['tipo_alimento'],
+            'recomendaciones_medicas' => $mascotas['recomendaciones_medicas'],
+            'updated_at' => 
+        ]);
     }
 
     // Almacenar una nueva mascota en la base de datos
-    public function store(Request $request)
-    {
+  
        
-        $mascotas = Mascota::create($request->post());
-        return response()->json([
-            'mascotas' => $mascotas
-        ]);
+        public function store(Request $request)
+        {
+            $mascotaData = $request->post();
+            $mascotaData['user_id'] = auth()->user()->id; // Asignar el ID del usuario autenticado
+            $mascota = Mascota::create($mascotaData);
+        
+            return response()->json([
+                'mascota' => $mascota
+            ]);
+        }
+        
 
-    }
+    
 
     // Mostrar el detalle de una mascota
     public function show(Mascota $mascota)
