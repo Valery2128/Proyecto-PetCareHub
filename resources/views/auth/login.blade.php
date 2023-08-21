@@ -1,13 +1,7 @@
 @extends('layouts.app')
 
 @section('content')     
-<div id="app">
-    <v-app>
-        <v-main>
-            <example-component/>
-        </v-main>
-    </v-app>
-</div>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

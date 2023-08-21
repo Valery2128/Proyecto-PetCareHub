@@ -5182,6 +5182,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5208,7 +5214,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         value: 'tipo_alimento'
       }, {
         text: 'Recomendaciones',
-        value: 'recomendaciones_medicas'
+        value: 'recomendaciones_cuidado'
+      }, {
+        text: 'Acciones',
+        value: 'actions',
+        sortable: false
       }
       // columnas base de datos
       ]
@@ -5221,30 +5231,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     listar: function listar() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response;
+        var res;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/mascotas');
-            case 3:
-              response = _context.sent;
-              // Ajusta la URL 
-              _this.mascotas = response.data;
-              _context.next = 10;
-              break;
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
-              console.error('Error al cargar mascotas:', _context.t0);
-            case 10:
+              _context.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get('mascotas');
+            case 2:
+              res = _context.sent;
+              _this.mascotas = res.data;
+            case 4:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee);
       }))();
     }
+  },
+  created: function created() {
+    this.listar();
   }
 });
 
@@ -5277,22 +5282,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
  // Ensure you are using css-loader
 
-var Home = function Home() {
-  return __webpack_require__.e(/*! import() */ "resources_js_components_Home_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Home.vue */ "./resources/js/components/Home.vue"));
-};
-var Contacto = function Contacto() {
-  return __webpack_require__.e(/*! import() */ "resources_js_components_Contacto_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Contacto.vue */ "./resources/js/components/Contacto.vue"));
-};
-//importar componentes de Mascotas
-var Mostrar = function Mostrar() {
-  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module './components/Mascotas/Mostrar.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
-};
-var Crear = function Crear() {
-  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module './components/Mascotas/Crear.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
-};
-var Editar = function Editar() {
-  return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module './components/Mascotas/Editar.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
-};
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].use((vuetify__WEBPACK_IMPORTED_MODULE_4___default()));
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
@@ -5305,8 +5294,6 @@ vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(vue_router__WEBPACK_IMPORTED_MOD
 
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('app-component', (__webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('mascota-component', (__webpack_require__(/*! ./components/Mascota/Mostrar.vue */ "./resources/js/components/Mascota/Mostrar.vue")["default"]));
-// Vue.component('mascota-crear', require('./components/Mascota/Crear.vue').default);
-
 var app = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
   el: '#app',
   vuetify: new (vuetify__WEBPACK_IMPORTED_MODULE_4___default())({
@@ -28135,35 +28122,72 @@ var render = function () {
     [
       _c("h1", { staticClass: "text-center" }, [_vm._v("Gestionar Mascotas")]),
       _vm._v(" "),
-      _c("v-data-table", {
-        staticClass: "elevation-1",
-        attrs: { headers: _vm.headers, items: _vm.mascotas, "item-key": "id" },
-        scopedSlots: _vm._u([
-          {
-            key: "item",
-            fn: function (ref) {
-              var item = ref.item
-              return [
-                _c("tr", [
-                  _c("td", [_vm._v(_vm._s(item.id))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item.nombre))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item.edad))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item.tipo_mascota))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item.rasgos_fisicos))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item.tipo_alimento))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(item.recomendaciones_medicas))]),
-                ]),
-              ]
-            },
+      _c(
+        "v-data-table",
+        {
+          staticClass: "elevation-1",
+          attrs: {
+            headers: _vm.headers,
+            items: _vm.mascotas,
+            "item-key": "id",
           },
-        ]),
-      }),
+          scopedSlots: _vm._u([
+            {
+              key: "item.actions",
+              fn: function (ref) {
+                var item = ref.item
+                return [
+                  _c(
+                    "v-icon",
+                    {
+                      staticClass: "mr-2",
+                      attrs: { small: "" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.editarMascota(item)
+                        },
+                      },
+                    },
+                    [_vm._v("mdi-pencil")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-icon",
+                    {
+                      attrs: { small: "" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.eliminarMascota(item)
+                        },
+                      },
+                    },
+                    [_vm._v("mdi-delete")]
+                  ),
+                ]
+              },
+            },
+          ]),
+        },
+        [
+          _vm._v(" "),
+          _vm._l(_vm.mascotas, function (m) {
+            return _c("tr", { key: m.id }, [
+              _c("td", [_vm._v(_vm._s(m.nombre))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(m.edad))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(m.tipo_mascota))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(m.rasgos_fisicos))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(m.tipo_alimento))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(m.recomendaciones_cuidado))]),
+            ])
+          }),
+        ],
+        2
+      ),
     ],
     1
   )
@@ -89829,39 +89853,6 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/ensure chunk */
-/******/ 	(() => {
-/******/ 		__webpack_require__.f = {};
-/******/ 		// This file contains only the entry chunk.
-/******/ 		// The chunk loading function for additional chunks
-/******/ 		__webpack_require__.e = (chunkId) => {
-/******/ 			return Promise.all(Object.keys(__webpack_require__.f).reduce((promises, key) => {
-/******/ 				__webpack_require__.f[key](chunkId, promises);
-/******/ 				return promises;
-/******/ 			}, []));
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/get javascript chunk filename */
-/******/ 	(() => {
-/******/ 		// This function allow to reference async chunks
-/******/ 		__webpack_require__.u = (chunkId) => {
-/******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Home_vue":1,"resources_js_components_Contacto_vue":1}[chunkId]) return "js/" + chunkId + ".js";
-/******/ 			// return url for filenames based on template
-/******/ 			return undefined;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/get mini-css chunk filename */
-/******/ 	(() => {
-/******/ 		// This function allow to reference all chunks
-/******/ 		__webpack_require__.miniCssF = (chunkId) => {
-/******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + ".css";
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -89877,52 +89868,6 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/load script */
-/******/ 	(() => {
-/******/ 		var inProgress = {};
-/******/ 		// data-webpack is not used as build has no uniqueName
-/******/ 		// loadScript function to load a script via script tag
-/******/ 		__webpack_require__.l = (url, done, key, chunkId) => {
-/******/ 			if(inProgress[url]) { inProgress[url].push(done); return; }
-/******/ 			var script, needAttach;
-/******/ 			if(key !== undefined) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				for(var i = 0; i < scripts.length; i++) {
-/******/ 					var s = scripts[i];
-/******/ 					if(s.getAttribute("src") == url) { script = s; break; }
-/******/ 				}
-/******/ 			}
-/******/ 			if(!script) {
-/******/ 				needAttach = true;
-/******/ 				script = document.createElement('script');
-/******/ 		
-/******/ 				script.charset = 'utf-8';
-/******/ 				script.timeout = 120;
-/******/ 				if (__webpack_require__.nc) {
-/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
-/******/ 				}
-/******/ 		
-/******/ 		
-/******/ 				script.src = url;
-/******/ 			}
-/******/ 			inProgress[url] = [done];
-/******/ 			var onScriptComplete = (prev, event) => {
-/******/ 				// avoid mem leaks in IE.
-/******/ 				script.onerror = script.onload = null;
-/******/ 				clearTimeout(timeout);
-/******/ 				var doneFns = inProgress[url];
-/******/ 				delete inProgress[url];
-/******/ 				script.parentNode && script.parentNode.removeChild(script);
-/******/ 				doneFns && doneFns.forEach((fn) => (fn(event)));
-/******/ 				if(prev) return prev(event);
-/******/ 			}
-/******/ 			var timeout = setTimeout(onScriptComplete.bind(null, undefined, { type: 'timeout', target: script }), 120000);
-/******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
-/******/ 			script.onload = onScriptComplete.bind(null, script.onload);
-/******/ 			needAttach && document.head.appendChild(script);
-/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
@@ -89945,11 +89890,6 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	(() => {
-/******/ 		__webpack_require__.p = "/";
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		// no baseURI
@@ -89962,44 +89902,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			"css/app": 0
 /******/ 		};
 /******/ 		
-/******/ 		__webpack_require__.f.j = (chunkId, promises) => {
-/******/ 				// JSONP chunk loading for javascript
-/******/ 				var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
-/******/ 				if(installedChunkData !== 0) { // 0 means "already installed".
-/******/ 		
-/******/ 					// a Promise means "currently loading".
-/******/ 					if(installedChunkData) {
-/******/ 						promises.push(installedChunkData[2]);
-/******/ 					} else {
-/******/ 						if("css/app" != chunkId) {
-/******/ 							// setup Promise in chunk cache
-/******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
-/******/ 							promises.push(installedChunkData[2] = promise);
-/******/ 		
-/******/ 							// start chunk loading
-/******/ 							var url = __webpack_require__.p + __webpack_require__.u(chunkId);
-/******/ 							// create error before stack unwound to get useful stacktrace later
-/******/ 							var error = new Error();
-/******/ 							var loadingEnded = (event) => {
-/******/ 								if(__webpack_require__.o(installedChunks, chunkId)) {
-/******/ 									installedChunkData = installedChunks[chunkId];
-/******/ 									if(installedChunkData !== 0) installedChunks[chunkId] = undefined;
-/******/ 									if(installedChunkData) {
-/******/ 										var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-/******/ 										var realSrc = event && event.target && event.target.src;
-/******/ 										error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
-/******/ 										error.name = 'ChunkLoadError';
-/******/ 										error.type = errorType;
-/******/ 										error.request = realSrc;
-/******/ 										installedChunkData[1](error);
-/******/ 									}
-/******/ 								}
-/******/ 							};
-/******/ 							__webpack_require__.l(url, loadingEnded, "chunk-" + chunkId, chunkId);
-/******/ 						} else installedChunks[chunkId] = 0;
-/******/ 					}
-/******/ 				}
-/******/ 		};
+/******/ 		// no chunk on demand loading
 /******/ 		
 /******/ 		// no prefetching
 /******/ 		

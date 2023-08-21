@@ -11,12 +11,7 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 
-const Home =()=> import('./components/Home.vue')
-const Contacto =()=> import('./components/Contacto.vue')
-//importar componentes de Mascotas
-const Mostrar =()=> import('./components/Mascotas/Mostrar.vue')
-const Crear =()=> import('./components/Mascotas/Crear.vue')
-const Editar =()=> import('./components/Mascotas/Editar.vue')
+
 
 Vue.use(Vuetify);
 
@@ -33,7 +28,7 @@ Vue.use(VueRouter);
 
 Vue.component('app-component', require('./components/App.vue').default);
 Vue.component('mascota-component', require('./components/Mascota/Mostrar.vue').default);
-// Vue.component('mascota-crear', require('./components/Mascota/Crear.vue').default);
+
 
 
 

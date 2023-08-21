@@ -7,18 +7,24 @@
       class="elevation-1"
       item-key="id"
     >
-      <template #item="{ item }">
-        <tr>
-          <td>{{ item.id }}</td>
-          <td>{{ item.nombre }}</td>
-          <td>{{ item.edad }}</td>
-          <td>{{ item.tipo_mascota }}</td>
-          <td>{{ item.rasgos_fisicos }}</td>
-          <td>{{ item.tipo_alimento }}</td>
-          <td>{{ item.recomendaciones_medicas }}</td>
-
-        </tr>
+    <template v-slot:item.actions="{ item }">
+        <v-icon small class="mr-2" @click="editarMascota(item)">mdi-pencil</v-icon>
+        <v-icon small @click="eliminarMascota(item)">mdi-delete</v-icon>
       </template>
+
+    <template>
+  <tr v-for="m in mascotas" :key="m.id">
+    <td>{{ m.nombre }}</td>
+    <td>{{ m.edad }}</td>
+    <td>{{ m.tipo_mascota }}</td>
+    <td>{{ m.rasgos_fisicos }}</td>
+    <td>{{ m.tipo_alimento }}</td>
+    <td>{{ m.recomendaciones_cuidado}}</td>
+    <!-- <td>{{ m.recomendaciones_medicas }}</td> -->
+
+  </tr>
+</template>
+
     </v-data-table>
   </div>
 </template>
@@ -37,7 +43,8 @@ export default {
         { text: 'Tipo de Mascota', value: 'tipo_mascota' },
         { text: 'Rasgos Físicos', value: 'rasgos_fisicos' },
         { text: 'Tipo de Alimento', value: 'tipo_alimento' },
-        { text: 'Recomendaciones', value: 'recomendaciones_medicas' },
+        { text: 'Recomendaciones', value: 'recomendaciones_cuidado' },
+        { text: 'Acciones', value: 'actions', sortable: false }
         // columnas base de datos
       ],
     };
@@ -47,15 +54,17 @@ export default {
   },
   methods: {
     async listar() {
-      try {
-        const response = await axios.get('/api/mascotas'); // Ajusta la URL 
-        this.mascotas = response.data;
-      } catch (error) {
-        console.error('Error al cargar mascotas:', error);
-      }
-    },
+      const res =await axios.get('mascotas');
+      this.mascotas =res.data;
+    }
+  
   },
-};
+
+  created(){
+    this.listar();
+
+  },
+}
 </script>
 
 <style>
