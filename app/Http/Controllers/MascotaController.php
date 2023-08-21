@@ -10,8 +10,7 @@ class MascotaController extends Controller
     // Mostrar una lista de mascotas
     public function index()
     {
-        $mascotas = Mascota::all();
-        return response()->json($mascotas);
+   return Mascota::get();
     }
 
     // Mostrar el formulario de creación de mascotas
@@ -19,12 +18,12 @@ class MascotaController extends Controller
     {
         return Mascota::create([
             'nombre' => $mascotas['nombre'],
-            'edad' => Hash::make($mascotas['edad']),
+            'edad' => $mascotas($mascotas['edad']),
             'tipo_mascota' => $mascotas['tipo_mascota'],
             'rasgos_fisicos' => $mascotas['rasgos_fisicos'],
             'tipo_alimento' => $mascotas['tipo_alimento'],
             'recomendaciones_medicas' => $mascotas['recomendaciones_medicas'],
-            'updated_at' => 
+         
         ]);
     }
 
@@ -33,9 +32,11 @@ class MascotaController extends Controller
        
         public function store(Request $request)
         {
-            $mascotaData = $request->post();
+            $mascota = new Mascota;
+            $mascota->create($request -> all());
+            // $mascotaData = $request->post();
             $mascotaData['user_id'] = auth()->user()->id; // Asignar el ID del usuario autenticado
-            $mascota = Mascota::create($mascotaData);
+            // $mascota = Mascota::create($mascotaData);
         
             return response()->json([
                 'mascota' => $mascota
@@ -60,8 +61,8 @@ class MascotaController extends Controller
     // Actualizar los datos de una mascota en la base de datos
     public function update(Request $request, Mascota $mascota)
     {
-        
-     $mascota->fill($request->post())->save();
+        $mascota->update($request -> all());
+    //  $mascota->fill($request->post())->save();
      return response()->json([
 
        'mascota' => $mascota

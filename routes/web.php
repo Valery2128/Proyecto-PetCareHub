@@ -21,3 +21,7 @@ Auth::routes();
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::post('/registrar-mascota', 'MascotaController@registrarMascota')->name('registrar-mascota');
+Route::Resource('/mascotas', App\Http\Controllers\MascotaController::class);
+
+
