@@ -10,6 +10,14 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
+
+const Home =()=> import('./components/Home.vue')
+const Contacto =()=> import('./components/Contacto.vue')
+//importar componentes de Mascotas
+const Mostrar =()=> import('./components/Mascotas/Mostrar.vue')
+const Crear =()=> import('./components/Mascotas/Crear.vue')
+const Editar =()=> import('./components/Mascotas/Editar.vue')
+
 Vue.use(Vuetify);
 
 Vue.use(VueRouter);
@@ -25,27 +33,58 @@ Vue.use(VueRouter);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('app-component', require('./components/App.vue').default);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
-const app = new Vue({
-    el: '#app',
-    vuetify: new Vuetify({
-         iconfont: 'mdi', // default - only for display purposes,
-         theme: {
-            themes: {
-                link: '#29c1cc',
-                    primary: '#0054a5',
-                    secondary: '#6606D2',
-                    accent: '#82B1FF',
-                    error: '#FF5252',
-                    info: '#2196F3',
-                    success: '#4CAF50',
-                    warning: '#FFC107',
-            }
-         }
+
+
+export const routes = [
+    {
+        path:'/',
+        component: Home
+    },
+    {
+        path:'/contacto',
+        component: Contacto
+    },
+    {
+        path:'/mascotas',
+        component: Mostrar
+    },
+    {
+        path:'/crear',
+        component: Crear
+    },
+    {
+        path:'/editar/:id',
+        component: Editar
+    },
+    ]
+
+
+    const router = createRouter({
+        history: createWebHistory(),
+        routes
     })
-});
+
+createApp({})
+.use(router)
+.mount('#app')
+
+// const app = new Vue({
+//     el: '#app',
+
+//     vuetify: new Vuetify({
+//          iconfont: 'mdi', // default - only for display purposes,
+//          theme: {
+//             themes: {
+//                 link: '#29c1cc',
+//                     primary: '#0054a5',
+//                     secondary: '#6606D2',
+//                     accent: '#82B1FF',
+//                     error: '#FF5252',
+//                     info: '#2196F3',
+//                     success: '#4CAF50',
+//                     warning: '#FFC107',
+//             }
+//          }
+//     })
+// });
