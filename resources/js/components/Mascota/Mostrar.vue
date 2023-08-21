@@ -38,7 +38,7 @@ export default {
         { text: 'Rasgos Físicos', value: 'rasgos_fisicos' },
         { text: 'Tipo de Alimento', value: 'tipo_alimento' },
         { text: 'Recomendaciones', value: 'recomendaciones_medicas' },
-        // Agrega más encabezados aquí según las columnas de tu base de datos
+        // columnas base de datos
       ],
     };
   },
@@ -48,7 +48,7 @@ export default {
   methods: {
     async listar() {
       try {
-        const response = await axios.get('/api/mascotas'); // Ajusta la URL a tu API
+        const response = await axios.get('/api/mascotas'); // Ajusta la URL 
         this.mascotas = response.data;
       } catch (error) {
         console.error('Error al cargar mascotas:', error);
@@ -59,5 +59,5 @@ export default {
 </script>
 
 <style>
-/* Estilos personalizados si es necesario */
+
 </style>
