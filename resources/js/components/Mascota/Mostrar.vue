@@ -3,54 +3,61 @@
     <h1 class="text-center">Gestionar Mascotas</h1>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="mascotas"
       class="elevation-1"
-      item-key="name"
-    ></v-data-table>
+      item-key="id"
+    >
+      <template #item="{ item }">
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.nombre }}</td>
+          <td>{{ item.edad }}</td>
+          <td>{{ item.tipo_mascota }}</td>
+          <td>{{ item.rasgos_fisicos }}</td>
+          <td>{{ item.tipo_alimento }}</td>
+          <td>{{ item.recomendaciones_medicas }}</td>
+
+        </tr>
+      </template>
+    </v-data-table>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      desserts: [
-        {
-          name: 'Mascota 1',
-          edad: 3,
-          tipo_mascota: 'Perro',
-          rasgos_fisicos: 'Peludo',
-          tipo_alimento: 'Croquetas',
-          recomendaciones: 'Paseos diarios',
-        },
-        {
-          name: 'Mascota 2',
-          edad: 2,
-          tipo_mascota: 'Gato',
-          rasgos_fisicos: 'Pelaje largo',
-          tipo_alimento: 'Comida húmeda',
-          recomendaciones: 'Juguetes interactivos',
-        },
-
-      ],
+      mascotas: [],
       headers: [
-        {
-          text: 'Nombre Mascota',
-          align: 'start',
-          sortable: false,
-          value: 'name',
-        },
-        { text: 'Edad', align: 'end', value: 'edad' },
-        { text: 'Tipo de Mascota', align: 'end', value: 'tipo_mascota' },
-        { text: 'Rasgos Físicos', align: 'end', value: 'rasgos_fisicos' },
-        { text: 'Tipo de Alimento', align: 'end', value: 'tipo_alimento' },
-        { text: 'Recomendaciones', align: 'end', value: 'recomendaciones' },
+        { text: 'ID', value: 'id' },
+        { text: 'Nombre', value: 'nombre' },
+        { text: 'Edad', value: 'edad' },
+        { text: 'Tipo de Mascota', value: 'tipo_mascota' },
+        { text: 'Rasgos Físicos', value: 'rasgos_fisicos' },
+        { text: 'Tipo de Alimento', value: 'tipo_alimento' },
+        { text: 'Recomendaciones', value: 'recomendaciones_medicas' },
+        // Agrega más encabezados aquí según las columnas de tu base de datos
       ],
     };
+  },
+  mounted() {
+    this.listar();
+  },
+  methods: {
+    async listar() {
+      try {
+        const response = await axios.get('/api/mascotas'); // Ajusta la URL a tu API
+        this.mascotas = response.data;
+      } catch (error) {
+        console.error('Error al cargar mascotas:', error);
+      }
+    },
   },
 };
 </script>
 
 <style>
-
+/* Estilos personalizados si es necesario */
 </style>
