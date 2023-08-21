@@ -25,7 +25,7 @@ Vue.use(VueRouter);
 
 Vue.component('app-component', require('./components/App.vue').default);
 Vue.component('mascota-component', require('./components/Mascota/Mostrar.vue').default);
-Vue.component('mascota-crear', require('./components/Mascota/Crear.vue').default);
+// Vue.component('mascota-crear', require('./components/Mascota/Crear.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
