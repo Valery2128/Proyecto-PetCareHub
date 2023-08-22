@@ -33,60 +33,28 @@ Vue.use(VueRouter);
 
 Vue.component('app-component', require('./components/App.vue').default);
 Vue.component('mascota-component', require('./components/Mascota/Mostrar.vue').default);
-// Vue.component('mascota-crear', require('./components/Mascota/Crear.vue').default);
+Vue.component('home-component', require('./components/Mascota/Home.vue').default);
+Vue.component('mascota-crear-component', require('./components/Mascota/Crear.vue').default);
 
 
 
 
-export const routes = [
-    {
-        path:'/',
-        component: Home
-    },
-    {
-        path:'/contacto',
-        component: Contacto
-    },
-    {
-        path:'/mascotas',
-        component: Mostrar
-    },
-    {
-        path:'/crear',
-        component: Crear
-    },
-    {
-        path:'/editar/:id',
-        component: Editar
-    },
-    ]
+const app = new Vue({
+    el: '#app',
 
-
-    const router = createRouter({
-        history: createWebHistory(),
-        routes
+    vuetify: new Vuetify({
+         iconfont: 'mdi', // default - only for display purposes,
+         theme: {
+            themes: {
+                link: '#29c1cc',
+                    primary: '#0054a5',
+                    secondary: '#6606D2',
+                    accent: '#82B1FF',
+                    error: '#FF5252',
+                    info: '#2196F3',
+                    success: '#4CAF50',
+                    warning: '#FFC107',
+            }
+         }
     })
-
-createApp({})
-.use(router)
-.mount('#app')
-
-// const app = new Vue({
-//     el: '#app',
-
-//     vuetify: new Vuetify({
-//          iconfont: 'mdi', // default - only for display purposes,
-//          theme: {
-//             themes: {
-//                 link: '#29c1cc',
-//                     primary: '#0054a5',
-//                     secondary: '#6606D2',
-//                     accent: '#82B1FF',
-//                     error: '#FF5252',
-//                     info: '#2196F3',
-//                     success: '#4CAF50',
-//                     warning: '#FFC107',
-//             }
-//          }
-//     })
-// });
+});

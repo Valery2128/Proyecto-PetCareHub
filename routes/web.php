@@ -19,8 +19,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/view/mascotas/{id}', [App\Http\Controllers\MascotaController::class, 'viewindex']);
+Route::get('/view/registrarcontrol/{id}', [App\Http\Controllers\MascotaController::class, 'registrarcontrol']);
+Route::get('/view/registrarindicador/{id}', [App\Http\Controllers\MascotaController::class, 'registrarindicador']);
+Route::get('/view/registrarsalud/{id}', [App\Http\Controllers\MascotaController::class, 'registrarsalud']);
+Route::get('/view/registrarseguimiento/{id}', [App\Http\Controllers\MascotaController::class, 'registrarseguimiento']);
+Route::get('/view/registrarveterinario/{id}', [App\Http\Controllers\MascotaController::class, 'registrarveterinario']);
 // Route::post('/registrar-mascota', 'MascotaController@registrarMascota')->name('registrar-mascota');
 Route::Resource('/mascotas', App\Http\Controllers\MascotaController::class);
-
-1

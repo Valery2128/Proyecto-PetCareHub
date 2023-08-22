@@ -12,7 +12,50 @@ class MascotaController extends Controller
     {
    return Mascota::get();
     }
-
+    public function viewindex()
+    {
+        return view('mascota.index');
+    }
+    public function registrarcontrol($id)
+    {
+        $mascota = Mascota::find($id);
+        if ($mascota == null) {
+            return redirect("/home");
+        }
+        return view('mascota.registrarcontrol', compact('mascota'));
+    }
+    public function registrarindicador($id)
+    { 
+        $mascota = Mascota::find($id);
+        if ($mascota == null) {
+            return redirect("/home");
+        }
+        return view('mascota.registrarindicador', compact('mascota'));
+    }
+    public function registrarsalud($id)
+    { 
+        $mascota = Mascota::find($id);
+        if ($mascota == null) {
+            return redirect("/home");
+        }
+        return view('mascota.registrarsalud', compact('mascota'));
+    }
+    public function registrarseguimiento($id)
+    { 
+        $mascota = Mascota::find($id);
+        if ($mascota == null) {
+            return redirect("/home");
+        }
+        return view('mascota.registrarseguimiento', compact('mascota'));
+    }
+    public function registrarveterinario($id)
+    { 
+        $mascota = Mascota::find($id);
+        if ($mascota == null) {
+            return redirect("/home");
+        }
+        return view('mascota.registrarveterinario', compact('mascota'));
+    }
     // Mostrar el formulario de creación de mascotas
     public function create(array $mascotas)
     {
