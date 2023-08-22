@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <mascotas-component></mascotas-component>
+            <mascota-component></mascota-component>
         </div>
     </div>
 </div>

@@ -62,14 +62,15 @@
             </div>
         </div>
         @endforeach
-        <div class="col-md-4">
-            <a class="card w-100 h-100 hover-zoom btn btn-secondary" href="/crear" style="cursor: pointer;">
+
+        {{-- <div class="col-md-4">
+            <a class="card w-100 h-100 hover-zoom btn btn-secondary" href="/mascota" style="cursor: pointer;">
                 <img class="card-img-top m-auto" style="max-height: 345px; max-width: 345px;" src="https://cdn1.iconfinder.com/data/icons/animals-95/300/cat-add-animal-pet-wild-domestic-512.png" alt="Card image cap">
                 <div class="card-body">
                     <h2 class="card-title text-center text-black">Agregar mascota</h2>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 @endsection

@@ -10,7 +10,7 @@ class MascotaController extends Controller
     // Mostrar una lista de mascotas
     public function index()
     {
-   return Mascota::get();
+        return Mascota::get();
     }
     public function viewindex()
     {
@@ -59,40 +59,62 @@ class MascotaController extends Controller
     // Mostrar el formulario de creación de mascotas
     public function create(array $mascotas)
     {
-        return Mascota::create([
-            'nombre' => $mascotas['nombre'],
-            'edad' => $mascotas($mascotas['edad']),
-            'tipo_mascota' => $mascotas['tipo_mascota'],
-            'rasgos_fisicos' => $mascotas['rasgos_fisicos'],
-            'tipo_alimento' => $mascotas['tipo_alimento'],
-            'recomendaciones_medicas' => $mascotas['recomendaciones_medicas'],
-         
-        ]);
+        try {
+            
+            $response = Mascota::create([
+                'nombre' => $mascotas['nombre'],
+                'edad' => $mascotas($mascotas['edad']),
+                'tipo_mascota' => $mascotas['tipo_mascota'],
+                'rasgos_fisicos' => $mascotas['rasgos_fisicos'],
+                'tipo_alimento' => $mascotas['tipo_alimento'],
+                'recomendaciones_medicas' => $mascotas['recomendaciones_medicas'],
+
+            ]);
+            return response()->json([
+                'msg' => "Item creado en la base de datos",
+                'mascota' => $response
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+            ]);
+        }
     }
 
     // Almacenar una nueva mascota en la base de datos
-  
-       
-        public function store(Request $request)
-        {
+
+
+    public function store(Request $request)
+    {
+        try {
             $mascota = new Mascota;
-            $mascota->create($request -> all());
-            // $mascotaData = $request->post();
-            $mascotaData['user_id'] = auth()->user()->id; // Asignar el ID del usuario autenticado
-            // $mascota = Mascota::create($mascotaData);
-        
+            // $mascota->create($request->all());
+            $mascotaData = $request->post();
+            $mascotaData['user_id'] = auth()->user()->id; // Asignar el ID del usuario autenticado esta perfecto 
+            $mascota = Mascota::create($mascotaData);
+
             return response()->json([
+                'msg' => "Item creado en la base de datos",
                 'mascota' => $mascota
             ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+            ]);
         }
-        
+    }
 
-    
+
+
 
     // Mostrar el detalle de una mascota
     public function show(Mascota $mascota)
     {
-       return response()->json($mascota);
+        return response()->json($mascota);
     }
 
     // Mostrar el formulario de edición de una mascota
@@ -104,22 +126,39 @@ class MascotaController extends Controller
     // Actualizar los datos de una mascota en la base de datos
     public function update(Request $request, Mascota $mascota)
     {
-        $mascota->update($request -> all());
-    //  $mascota->fill($request->post())->save();
-     return response()->json([
+        try {
+            //code...
+            $mascota->update($request->all());
+            $mascota->fill($request->post())->save();
+            return response()->json([
+                'msg' => "Item actualizado en la base de datos",
+                'mascota' => $mascota
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+            ]);
+        }
+    }
 
-       'mascota' => $mascota
-    ]);
-}
-    
 
     // Eliminar una mascota de la base de datos
     public function destroy(Mascota $mascota)
     {
-        $mascota->delete();
-        return response()->json([
-          'mensaje' => 'Mascota Eliminada'
-        ]);
+        try {
+            $mascota->delete();
+            return response()->json([
+                'msg' => "Item eliminado en la base de datos",
+                'mascota' => $mascota
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => $th->getMessage(),
+                'file' => $th->getFile(),
+                'line' => $th->getLine(),
+            ]);
+        }
     }
 }
-

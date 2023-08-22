@@ -34,15 +34,15 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/home">Home</a>
-                        <a class="dropdown-item" href="/view/mascotas">Mascotas</a>
+                        <a class="dropdown-item" href="/mascota">Mascotas</a>
                         <a class="dropdown-item" href="/account">Account</a>
                     </div>
                 </li>
             </ul>
             
             <a class="navbar-brand" href="{{ url('/') }}" @click.prevent="toggleMenu">
-    {{ config('app.name', 'Home') }}
-</a>
+                {{ config('app.name', 'Home') }}
+            </a>
 
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -93,10 +93,11 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
+    <v-app>
+        <main>
             @yield('content')
-        </main>
+        </main> 
+    </v-app>
     </div>
 </body>
 </html>

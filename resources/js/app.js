@@ -10,31 +10,34 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
+import 'vuetify/dist/vuetify.min.css'; // Importa los estilos de Vuetify
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
-const Home =()=> import('./components/Home.vue')
-const Contacto =()=> import('./components/Contacto.vue')
-//importar componentes de Mascotas
-const Mostrar =()=> import('./components/Mascotas/Mostrar.vue')
-const Crear =()=> import('./components/Mascotas/Crear.vue')
-const Editar =()=> import('./components/Mascotas/Editar.vue')
+const options = {
+    position: "top-right",
+    timeout: 5000,
+    closeOnClick: true,
+    pauseOnFocusLoss: true,
+    pauseOnHover: true,
+    draggable: true,
+    draggablePercent: 0.6,
+    showCloseButtonOnHover: false,
+    hideProgressBar: true,
+    closeButton: "button",
+    icon: true,
+    rtl: false
+};
 
+
+Vue.use(Toast, options);
 Vue.use(Vuetify);
-
 Vue.use(VueRouter);
-
-// const router = new VueRouter({
-//   mode: 'history',
-//   routes: routes
-// });
-
-
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
 Vue.component('app-component', require('./components/App.vue').default);
 Vue.component('mascota-component', require('./components/Mascota/Mostrar.vue').default);
 Vue.component('home-component', require('./components/Mascota/Home.vue').default);
-Vue.component('mascota-crear-component', require('./components/Mascota/Crear.vue').default);
 
 
 

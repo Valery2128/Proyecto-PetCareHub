@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
-Route::get('/view/mascotas/{id}', [App\Http\Controllers\MascotaController::class, 'viewindex']);
+Route::get('/mascota', [App\Http\Controllers\MascotaController::class, 'viewindex']);
 Route::get('/view/registrarcontrol/{id}', [App\Http\Controllers\MascotaController::class, 'registrarcontrol']);
 Route::get('/view/registrarindicador/{id}', [App\Http\Controllers\MascotaController::class, 'registrarindicador']);
 Route::get('/view/registrarsalud/{id}', [App\Http\Controllers\MascotaController::class, 'registrarsalud']);
