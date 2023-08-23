@@ -37,7 +37,8 @@ Vue.use(VueRouter);
 
 Vue.component('app-component', require('./components/App.vue').default);
 Vue.component('mascota-component', require('./components/Mascota/Mostrar.vue').default);
-Vue.component('home-component', require('./components/Mascota/Home.vue').default);
+Vue.component('home-component', require('./components/Home.vue').default);
+
 
 
 

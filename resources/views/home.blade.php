@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
 
-        @foreach($mascotas as $key => $value)
+    @foreach(auth()->user()->mascotas as $key => $value)
         <div class="col-md-4">
             <div class="card w-100">
                 <img class="card-img-top" style="max-height: 345px;" src="{{$value->imagen_url}}" alt="{{$value->imagen_url}}">

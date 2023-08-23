@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Mascota;
 use App\Models\CondicionSalud;
+use Illuminate\Support\Facades\Auth;
 
 class MascotaController extends Controller
 {
     // Mostrar una lista de mascotas
     public function index()
-    {
-        return Mascota::get();
+    {       
+      
+        return Mascota::where('user_id',auth()->user()->id)->get();
     }
     public function viewindex()
     {
@@ -137,7 +139,11 @@ class MascotaController extends Controller
     // Mostrar el detalle de una mascota
     public function show(Mascota $mascota)
     {
-        return response()->json($mascota);
+        dd('Solicitud para obtener mascotas del usuario autenticado recibida.');
+        
+        $userId = auth()->user()->id;
+        $mascotas = Mascota::where('user_id', $userId)->get();
+        return response()->json(['mascotas' => $mascotas]);
     }
 
     // Mostrar el formulario de edición de una mascota
@@ -165,6 +171,16 @@ class MascotaController extends Controller
             ]);
         }
     }
+    public function mascotasDeUsuarioAutenticado()
+    {
+        
+        $userId = auth()->user()->id; // no te creo jajajaja 
+        dd($userId);
+        $mascotas = Mascota::where('user_id', $userId)->get();
+        return response()->json(['mascotas' => $mascotas]);
+    }
+    
+
 
 
     // Eliminar una mascota de la base de datos
