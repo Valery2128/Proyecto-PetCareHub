@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <mascota-component></mascota-component>
+            <!-- <user-component></user-component> -->
         </div>
     </div>
 </div>

@@ -287,5 +287,5 @@ export default {
 </script>
 
 <style>
-/* Estilos adicionales */
+
 </style>

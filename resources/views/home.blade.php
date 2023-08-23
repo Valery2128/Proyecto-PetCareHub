@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
 
-        @foreach($mascotas as $key => $value)
+    @foreach(auth()->user()->mascotas as $key => $value)
         <div class="col-md-4">
             <div class="card w-100">
                 <img class="card-img-top" style="max-height: 345px;" src="https://plus.unsplash.com/premium_photo-1677545182067-26ac518ef64f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2156&q=80" alt="Card image cap">
