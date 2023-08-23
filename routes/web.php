@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,4 +35,7 @@ Route::get('/view/registrarseguimiento/{id}', [App\Http\Controllers\MascotaContr
 Route::get('/view/registrarveterinario/{id}', [App\Http\Controllers\MascotaController::class, 'registrarveterinario']);
 // Route::post('/registrar-mascota', 'MascotaController@registrarMascota')->name('registrar-mascota');
 Route::Resource('/mascotas', App\Http\Controllers\MascotaController::class);
-Route::get('/mascotas/mascotasDeUsuarioAutenticado', [App\Http\Controllers\MascotaController::class, 'mascotasDeUsuarioAutenticado']);
+Route::get('/mascotas/mascotasDeUsuarioAutenticado', [App\Http\Controllers\MascotaController::class, 'mascotasDeUsuarioAutenticado']);use Barryvdh\DomPDF\Facade as PDF;
+
+
+
