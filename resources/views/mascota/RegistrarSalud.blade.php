@@ -19,10 +19,11 @@
 <div class="card-body">
     <form action="{{url('registrarsalud')}}" method="post" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" value="{{$mascota->id}}" name="id">
         <div class="form-group">
             <label for="nameInput">Tipo de condicion<strong class="text-danger">*</strong></label>
-            <select value="{{old('name')}}" type="text" class="form-control @error('name') is-invalid @enderror"
-                   name="name" id="nameInput">
+            <select value="{{old('tipo_condicion')}}" type="text" class="form-control @error('tipo_condicion') is-invalid @enderror"
+                   name="tipo_condicion" id="tipo_condicion">
                    <option value="Enfermedades Infecciosas">Enfermedades Infecciosas</option>
                    <option value="Lesiones Traumáticas">Lesiones Traumáticas</option>
                    <option value="Problemas Respiratorios">Problemas Respiratorios</option>
@@ -47,17 +48,17 @@
         </div>
         <div class="form-group">
             <label for="emailInput">Descripción<strong class="text-danger">*</strong></label>
-            <textarea rows="3" class="form-control @error('description') is-invalid @enderror" name="description"
-                      id="descriptionInput" resize="none">{{old('description')}}</textarea>
+            <textarea rows="3" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion"
+                      id="descriptionInput" resize="none">{{old('descripcion')}}</textarea>
         </div>
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label for="dateInput">Fecha del registro<strong class="text-danger">*</strong></label>
                     <div class="input-group input-group-alternative">
-                        <input value="{{old('startDate', date('Y-m-d'))}}" type="date"
-                               class="form-control @error('startDate') is-invalid @enderror datepicker"
-                               name="startDate"
+                        <input value="{{old('fecha_registro', date('Y-m-d'))}}" type="date"
+                               class="form-control @error('fecha_registro') is-invalid @enderror"
+                               name="fecha_registro"
                                id="date" data-date-language="es" data-date-format="yyyy-mm-dd"
                                data-date-start-date="{{date('Y-m-d')}}"
                                data-date-end-date="+60d">

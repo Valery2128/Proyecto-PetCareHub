@@ -9,7 +9,7 @@ class Mascota extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id', 'user_id','nombre', 'edad', 'tipo_mascota', 'rasgos_fisicos', 'tipo_alimento', 'recomendaciones_cuidado'
+        'id', 'user_id','nombre', 'edad', 'tipo_mascota', 'rasgos_fisicos', 'tipo_alimento', 'recomendaciones_cuidado', 'imagen_url'
     ];
 
     public function user()

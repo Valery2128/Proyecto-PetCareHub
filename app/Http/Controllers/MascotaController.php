@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mascota;
+use App\Models\CondicionSalud;
 
 class MascotaController extends Controller
 {
@@ -39,6 +40,28 @@ class MascotaController extends Controller
             return redirect("/home");
         }
         return view('mascota.registrarsalud', compact('mascota'));
+    }
+    public function reportes($id)
+    { 
+        $condiciones = CondicionSalud::where('id_mascota', $id)->get();
+        $mascota = Mascota::find($id);
+        return view('mascota.reportes', compact('condiciones', 'mascota'));
+    }
+    public function registrarsaludstore(Request $request)
+    { 
+        $input = $request->only('id', 'tipo_condicion', 'fecha_registro', 'descripcion');
+        try {
+            CondicionSalud::create([
+                'id_mascota' => $input['id'],
+                'tipo_condicion' => $input['tipo_condicion'],
+                'fecha_registro' => $input['fecha_registro'],
+                'descripcion' => $input['descripcion']
+            ]);
+            return redirect('/home')->with('success', 'Registro de salud creado');
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect('/home')->with('error', 'error');
+        }
     }
     public function registrarseguimiento($id)
     { 
