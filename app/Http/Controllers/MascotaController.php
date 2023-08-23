@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Mascota;
 use App\Models\CondicionSalud;
+use App\Models\IndicadorSalud;
+use App\Models\ProcedimientoVeterinario;
 use Illuminate\Support\Facades\Auth;
 
 class MascotaController extends Controller
@@ -46,8 +48,11 @@ class MascotaController extends Controller
     public function reportes($id)
     { 
         $condiciones = CondicionSalud::where('id_mascota', $id)->get();
+        $indicadores = IndicadorSalud::where('id_mascota', $id)->get();
+        $veterinarios = ProcedimientoVeterinario::where('id_mascota', $id)->get();
+
         $mascota = Mascota::find($id);
-        return view('mascota.reportes', compact('condiciones', 'mascota'));
+        return view('mascota.reportes', compact('condiciones', 'mascota', 'indicadores', 'veterinarios'));
     }
     public function registrarsaludstore(Request $request)
     { 
@@ -60,6 +65,40 @@ class MascotaController extends Controller
                 'descripcion' => $input['descripcion']
             ]);
             return redirect('/home')->with('success', 'Registro de salud creado');
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect('/home')->with('error', 'error');
+        }
+    }
+    public function indicadorsaludstore(Request $request)
+    { 
+        $input = $request->only('id', 'tipo_indicador', 'fecha_registro', 'valor');
+        try {
+            IndicadorSalud::create([
+                'id_mascota' => $input['id'],
+                'tipo_indicador' => $input['tipo_indicador'],
+                'fecha_registro' => $input['fecha_registro'],
+                'valor' => $input['valor']
+            ]);
+            return redirect('/home')->with('success', 'Indicador de salud creado');
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect('/home')->with('error', 'error');
+        }
+    } 
+    
+    public function registrarveterinariostore(Request $request)
+    { 
+        $input = $request->only('id', 'tipo_procedimiento', 'resultado', 'fecha_procedimiento', 'imagen_url');
+        try {
+            ProcedimientoVeterinario::create([
+                'id_mascota' => $input['id'],
+                'tipo_procedimiento' => $input['tipo_procedimiento'],
+                'resultado' => $input['resultado'],
+                'fecha_procedimiento' => $input['fecha_procedimiento'],
+                'imagen_url' => $input['imagen_url']
+            ]);
+            return redirect('/home')->with('success', 'Indicador de salud creado');
         } catch (\Exception $e) {
             dd($e);
             return redirect('/home')->with('error', 'error');

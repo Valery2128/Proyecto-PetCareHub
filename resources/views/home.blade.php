@@ -6,7 +6,7 @@
 
     @foreach(auth()->user()->mascotas as $key => $value)
         <div class="col-md-4">
-            <div class="card w-100">
+            <div class="card w-100 h-100">
                 <img class="card-img-top" style="max-height: 345px;" src="{{$value->imagen_url}}" alt="{{$value->imagen_url}}">
                 <div class="card-body">
                             <h2 class="card-title text-center">

@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class IndicadorSalud extends Model
+class ProcedimientoVeterinario extends Model
 {
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'id', 'id_mascota', 'tipo_indicador', 'fecha_registro', 'valor'
+        'id', 'id_mascota', 'tipo_procedimiento', 'fecha_procedimiento', 'resultado', 'imagen_url'
     ];
-    protected $table = 'indicadoressalud';
+    protected $table = 'procedimientosveterinarios';
 
 
     public function mascota()

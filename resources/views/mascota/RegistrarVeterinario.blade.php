@@ -17,12 +17,13 @@
     </div>
 </div>
 <div class="card-body">
-    <form action="{{url('registrarsalud')}}" method="post" enctype="multipart/form-data">
+    <form action="{{url('registrarveterinario')}}" method="post" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" value="{{$mascota->id}}" name="id">
         <div class="form-group">
             <label for="nameInput">Tipo de procedimientos<strong class="text-danger">*</strong></label>
-            <select value="{{old('name')}}" type="text" class="form-control @error('name') is-invalid @enderror"
-                   name="name" id="nameInput">
+            <select value="{{old('tipo_procedimiento')}}" type="text" class="form-control @error('tipo_procedimiento') is-invalid @enderror"
+                   name="tipo_procedimiento" id="tipo_procedimiento">
                    <option value="Vacunación">Vacunación</option>
                    <option value="Esterilización/Neutro">Esterilización/Neutro</option>
                    <option value="Cirugía Electiva">Cirugía Electiva</option>
@@ -60,17 +61,17 @@
         </div>
         <div class="form-group">
             <label for="nameInput">Resultado<strong class="text-danger">*</strong></label>
-            <input value="{{old('name')}}" type="text" class="form-control @error('name') is-invalid @enderror"
-                   name="name" id="nameInput">
+            <input value="{{old('resultado')}}" type="text" class="form-control @error('resultado') is-invalid @enderror"
+                   name="resultado" id="nameInput">
         </div>
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="dateInput">Fecha del procedimiento<strong class="text-danger">*</strong></label>
+                    <label for="dateInput">Fecha del registro<strong class="text-danger">*</strong></label>
                     <div class="input-group input-group-alternative">
-                        <input value="{{old('startDate', date('Y-m-d'))}}" type="date"
-                               class="form-control @error('startDate') is-invalid @enderror datepicker"
-                               name="startDate"
+                        <input value="{{old('fecha_procedimiento', date('Y-m-d'))}}" type="date"
+                               class="form-control @error('fecha_procedimiento') is-invalid @enderror"
+                               name="fecha_procedimiento"
                                id="date" data-date-language="es" data-date-format="yyyy-mm-dd"
                                data-date-start-date="{{date('Y-m-d')}}"
                                data-date-end-date="+60d">
@@ -78,10 +79,10 @@
                 </div>
             </div>
         </div>
-        <div class="mb-3">
-            <label for="formFile" class="form-label">Selecciona una imagen de evidencia</label>
-            <input class="form-control @error('image') is-invalid @enderror" value="{{old('image')}}" name="image"
-                   type="file" id="formFile">
+        <div class="form-group">
+            <label for="nameInput">Imagen Url<strong class="text-danger">*</strong></label>
+            <input value="{{old('imagen_url')}}" type="text" class="form-control @error('imagen_url') is-invalid @enderror"
+                   name="imagen_url" id="nameInput">
         </div>
         <div class="row mx-auto">
             <button type="submit" class="btn btn-outline-success">Registrar procedimiento</button>
