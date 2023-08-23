@@ -37,6 +37,9 @@
                    <option value="Problemas Dermatológicos">Problemas Dermatológicos</option>
                    <option value="Problemas Oftalmológicos">Problemas Oftalmológicos</option>
                    <option value="Problemas Dentales">Problemas Dentales</option>
+                   <option value="Ninguna Enfermedad">Ninguna Enfermedad</option>
+                   <option value="Bajo de peso">Bajo de peso</option>
+                   <option value="Sobre peso">Sobre peso</option>
                    <option value="Cáncer">Cáncer</option>
                    <option value="Problemas de Comportamiento">Problemas de Comportamiento</option>
                    <option value="Problemas Reproductivos">Problemas Reproductivos</option>

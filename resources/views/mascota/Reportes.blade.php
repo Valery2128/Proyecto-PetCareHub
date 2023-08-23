@@ -2,8 +2,12 @@
 
 @section('content')
 <div class="container">
+   
     <div class="row">
         <h1 class="display-1 text-center">{{$mascota->nombre}}</h1>
+        <div class="container mt-4">
+        <button class="btn btn-danger">Generar PDF</button>
+    </div>
         <div class="col-md-3">
             <div class="card h-100">
                 <div class="card-body p-5">
@@ -12,6 +16,7 @@
                 </div>
             </div>
         </div>
+    
         <div class="col-md-3">
             <div class="card h-100">
                 <div class="card-body p-5">

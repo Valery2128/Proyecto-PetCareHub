@@ -45,7 +45,7 @@
     <v-data-table :headers="headers" :items="mascotas" class="elevation-1">
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>My CRUD</v-toolbar-title>
+          <v-toolbar-title>Pet</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
@@ -73,7 +73,7 @@
                         label="recomendaciones_cuidado"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field v-model="editedItem.tipo_alimento" label="tipo_alimento"></v-text-field>
+                      <v-text-field v-model="editedItem.tipo_alimento" label="tipo alimento"></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field v-model="editedItem.tipo_mascota" label="tipo_mascota"></v-text-field>
@@ -81,6 +81,7 @@
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field v-model="editedItem.edad" label="edad" type="number"></v-text-field>
                     </v-col>
+                    <v-text-field v-model="editedItem.imagen_url" accept="image/*" label="URL imagen"></v-text-field>
                   </v-row>
                 </v-container>
               </v-card-text>
@@ -117,6 +118,12 @@
           mdi-delete
         </v-icon>
       </template>
+
+      <template v-slot:item.img="{ item }">
+    <v-img :src="item.imagen_url" width="100px" height="100px"></v-img>
+      </template>
+
+
       <template v-slot:no-data>
         <v-btn color="primary" @click="listar">
           Reset
@@ -146,7 +153,9 @@ export default {
         { text: 'Rasgos Físicos', value: 'rasgos_fisicos' },
         { text: 'Tipo de Alimento', value: 'tipo_alimento' },
         { text: 'Recomendaciones', value: 'recomendaciones_cuidado' },
+        { text: 'img', value: 'img' },
         { text: 'Acciones', value: 'actions', sortable: false }
+        
       ],
 
       editedIndex: -1,
@@ -159,6 +168,7 @@ export default {
         tipo_alimento: "",
         tipo_mascota: "",
         user_id: 0,
+        imagen_url: "",
       },
       defaultItem: {
         id: 0,
@@ -169,6 +179,7 @@ export default {
         tipo_alimento: "",
         tipo_mascota: "",
         user_id: 0,
+        imagen_url: "",
       },
     };
   },
